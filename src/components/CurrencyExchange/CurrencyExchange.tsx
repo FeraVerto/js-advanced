@@ -76,6 +76,7 @@ const CurrencyExchange: React.FunctionComponent<CurrencyExchangePropsType> = ({
         </span>
       </div>
       <div className="fields">
+        {/*Выводим курс валюты*/}
         <p>Currency rate: {currencyRate}</p>
         {viewCurrency}
       </div>
