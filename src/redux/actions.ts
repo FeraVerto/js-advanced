@@ -4,37 +4,60 @@ export enum ACTIONS_TYPE {
   CHANGE_CURRENT_CURRENCY = 'CurrencyExchange/CHANGE_CURRENT_CURRENCY',
 }
 
+//обьект констант enum
+
 /*----------ChangeCurrencyField------------*/
 export type ChangeCurrencyFieldType = {
-  type: "CHANGE_CURRENCY_FIELD"
+  /*type: "CHANGE_CURRENCY_FIELD"
   amountOfBYN: string
-  amountOfCurrency: string
+  amountOfCurrency: string*/
+  type: ACTIONS_TYPE.CHANGE_CURRENCY_FIELD_TYPE
+  payload: {
+    amountOfBYN: string
+    amountOfCurrency: string
+  }
 };
 
-export const ChangeCurrencyFieldAC = (amountOfBYN: string, amountOfCurrency: string): ChangeCurrencyFieldType => ({
-  type: "CHANGE_CURRENCY_FIELD", amountOfBYN, amountOfCurrency,
-});
+export const ChangeCurrencyFieldAC = (amountOfBYN: string, amountOfCurrency: string): ChangeCurrencyFieldType => {
+  return {
+    type: ACTIONS_TYPE.CHANGE_CURRENCY_FIELD_TYPE,
+    payload: { amountOfBYN, amountOfCurrency },
+  };
+};
+/*{ type: "CHANGE_CURRENCY_FIELD", amountOfBYN, amountOfCurrency}*/
+
 
 /*----------ChangeAction------------*/
 
 export type ChangeAction = {
-  type: "IS_BUYING"
-  isBuying: boolean
+  type: ACTIONS_TYPE.CHANGE_CHANGE_ACTION
+  payload: {
+    isBuying: boolean
+  }
 };
 
-export const ChangeActionAC = (isBuying: boolean): ChangeAction => ({
-  type: "IS_BUYING", isBuying
-});
+export const ChangeActionAC = (isBuying: boolean): ChangeAction => {
+  return {
+    type: ACTIONS_TYPE.CHANGE_CHANGE_ACTION,
+    payload: { isBuying },
+  };
+};
+
 
 /*----------ChangeCurrentCurrency------------*/
 
 export type ChangeCurrentCurrencyType = {
-  type: "CHANGE_CURRENT_CURRENCY"
-  currentCurrency: string
+  type: ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY
+  payload: {
+    currentCurrency: string
+  }
 };
 
-export const changeCurrentCurrencyAC = (currentCurrency: string): ChangeCurrentCurrencyType => ({
-  type: "CHANGE_CURRENT_CURRENCY", currentCurrency
-});
+export const changeCurrentCurrencyAC = (currentCurrency: string): ChangeCurrentCurrencyType => {
+  return {
+    type: ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY,
+    payload: { currentCurrency }
+  };
+}
 
 export type CurrencyReducersTypes = ChangeCurrencyFieldType | ChangeAction | ChangeCurrentCurrencyType;

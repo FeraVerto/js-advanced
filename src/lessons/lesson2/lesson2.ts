@@ -24,6 +24,15 @@ console.log('lesson 2');
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
+
+let sum = (a: number) => {
+  return function(b: number) {
+    return a + b;
+  };
+};
+
+sum(3)(6);
+
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
 // const counter = makeCounter();
@@ -33,6 +42,21 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+let makeCounter = () => {
+  let count = 1;
+  return function a() {
+    return count++;
+  };
+};
+
+const counter = makeCounter();
+console.log(counter());
+console.log(counter());
+
+const counter2 = makeCounter();
+console.log(counter2());
+console.log(counter());
+
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -40,6 +64,27 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+let makeCounter1 = (a) => {
+  let count = a;
+  return {
+    increase: () => ++count,
+    decrease: () => --count,
+    reset: () => count = 0,
+    set: () => count = a,
+  };
+};
+
+//почему не работает count++, count--
+//При использовании префиксной нотации сначала происходит изменение переменной, а потом возврат.
+//При использовании постфиксной нотации — наоборот: сначала возврат, а потом изменение переменной.
+
+let counter1 = makeCounter1(4);
+console.log(counter1.increase());//5
+console.log(counter1.decrease());//4
+console.log(counter1.reset());//0
+console.log(counter1.set());//4
+
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -53,9 +98,96 @@ console.log('lesson 2');
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
+//@ts-ignore
+
+
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 
+//Напишите функцию sumTo(n), которая вычисляет сумму чисел 1 + 2 + ... + n.
+
+let sumTo = (n: number) => {
+  return n < 1 ? n : n + sumTo(n - 1);
+};
+
+sumTo(3);
+sumTo(100);
+
+let sumTo1 = (n: number) => {
+  let sum = 0;
+  for (let i = 0; i <= n; i++) {
+    sum += i;
+  }
+  return sum;
+};
+
+sumTo1(100);
+
+//a_n=a_1 + (n-1)d
+let sumTo2 = (n: number) => {
+  return ((n + 1) / 2) * (n);
+};
+sumTo2(100);
+
+
+//Вычислить факториал
+let getFactorial = (n: number): number => {
+  return n === 1 ? n : n * getFactorial(n - 1);
+};
+
+getFactorial(5);
+
+//Числа Фибоначчи(n-е чисто фибоначчи)
+let getFib = (a: number) => {
+  let arr = [1, 1];
+  for (let i = 1; i <= a; i++) {
+    let a = arr[i - 1] + arr[i];
+    arr.push(a);
+  }
+  return arr[a - 1];
+};
+
+getFib(77);
+
+/*function fib(n) {
+  let a = 1;
+  let b = 1;
+  for (let i = 3; i <= n; i++) {
+    let c = a + b;
+    a = b;
+    b = c;
+  }
+  return b;
+}*/
+
+/*
+let t0 = performance.now();
+let result = getFib(77);
+let t1 = performance.now();
+console.log('Took', (t1 - t0).toFixed(4), 'milliseconds to generate:', result);
+*/
+
+
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null,
+      },
+    },
+  },
+};
+
+/*let printList = (list) => {
+};
+printList(list);*/
+
+
 
 // just a plug
-export default () => {};
+export default () => {
+};

@@ -5,6 +5,7 @@ type CurrencyType = {
   buyRate: number;
   sellRate: number;
 };
+
 export type CurrencyState = {
   currencies: Array<CurrencyType>;
   currentCurrency: string;
@@ -36,18 +37,34 @@ const initialState: CurrencyState = {
   amountOfBYN: '',
   amountOfCurrency: '',
 };
+//можно переписать amountOfBYN: number,
+//amountOfCurrency: number,
 
 export const currencyReducer = (state: CurrencyState = initialState, action: CurrencyReducersTypes): CurrencyState => {
 
   switch (action.type) {
-    case 'CHANGE_CURRENCY_FIELD':
-      return { ...state, amountOfBYN: action.amountOfBYN, amountOfCurrency: action.amountOfCurrency };
+    case ACTIONS_TYPE.CHANGE_CURRENCY_FIELD_TYPE:
+      //return { ...state, amountOfBYN: action.payload.amountOfBYN, amountOfCurrency: action.payload.amountOfCurrency };
+      return {
+        ...state,
+        ...action.payload,
+      };
 
-    case 'IS_BUYING':
-      return { ...state, isBuying: action.isBuying };
-
-    case 'CHANGE_CURRENT_CURRENCY':
-      return { ...state, currentCurrency: action.currentCurrency };
+    case ACTIONS_TYPE.CHANGE_CHANGE_ACTION:
+      // return { ...state, isBuying: action.payload.isBuying };
+      return {
+        ...state,
+        ...action.payload,
+        amountOfBYN: '',
+        amountOfCurrency: '',
+      };
+    case ACTIONS_TYPE.CHANGE_CURRENT_CURRENCY:
+      return {
+        ...state,
+        ...action.payload,
+        amountOfBYN: '',
+        amountOfCurrency: '',
+      };
 
     default:
       return state;

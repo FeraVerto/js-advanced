@@ -11,6 +11,7 @@ import { CurrencyExchangeContainer } from '../../containers/CurrencyExchangeCont
 // https://habr.com/ru/company/ruvds/blog/426729/
 
 // Typescript from zero + typescript generic (English video)
+// середина четверга
 // https://www.youtube.com/watch?v=3d9XqFmCmQw
 
 // Container component
