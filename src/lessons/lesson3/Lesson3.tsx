@@ -8,22 +8,23 @@ const Lesson3 = () => {
   const [searchNameByType, setSearchNameByType] = useState('');
   const [searchResultByType, setSearchResultByType] = useState([]);
 
-  const searchFilm = () => {
-    API.searchFilmsByTitle(searchName).then(response => {
+
+  //utility
+  let apiFn = (fn: any) => {
+    return fn.then((response: any) => {
       if (response.Search) {
         setSearchResult(response.Search);
       }
     });
   };
 
+  const searchFilm = () => {
+    apiFn(API.searchFilmsByTitle(searchName));
+  };
+
   const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
     const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
-    API.searchFilmsByType(searchNameByType, type).then(response => {
-      if (response.Search) {
-        setSearchResultByType(response.Search);
-      }
-    });;
-
+    apiFn(API.searchFilmsByType(searchNameByType, type));
   };
 
   return (
