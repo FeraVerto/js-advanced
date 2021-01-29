@@ -13,9 +13,9 @@ const API = {
   },
 
   searchFilmsByType: (title: string, type: string) => {
-
+    const query = `${key}&s=${title}&type=${type}`;
+    return axiosInstance.get(query).then(res => res.data);
   },
 };
-
 
 export default API;

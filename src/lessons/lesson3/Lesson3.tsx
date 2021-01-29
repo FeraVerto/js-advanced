@@ -6,7 +6,7 @@ const Lesson3 = () => {
   const [searchName, setSearchName] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [searchNameByType, setSearchNameByType] = useState('');
-  const [searchResultByType, setSearchResultByType] = useState('');
+  const [searchResultByType, setSearchResultByType] = useState([]);
 
   const searchFilm = () => {
     API.searchFilmsByTitle(searchName).then(response => {
@@ -18,7 +18,12 @@ const Lesson3 = () => {
 
   const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
     const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
-    API.searchFilmsByType(searchNameByType, type);
+    API.searchFilmsByType(searchNameByType, type).then(response => {
+      if (response.Search) {
+        setSearchResultByType(response.Search);
+      }
+    });;
+
   };
 
   return (
@@ -41,7 +46,9 @@ const Lesson3 = () => {
         <button onClick={searchByType} data-t='movie'>Movie</button>
         <button onClick={searchByType} data-t='series'>Series</button>
         <div>
-          {searchResultByType}
+          {
+            searchResultByType.map((item: any, index: number) => <div key={index}>{item.Title}</div>)
+          }
         </div>
       </div>
     </div>
