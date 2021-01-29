@@ -19,6 +19,7 @@ console.log('lesson 2');
 // Recursion
 // https://learn.javascript.ru/recursion
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
+// Задачи на замыкания
 
 
 // Task 01
@@ -65,7 +66,7 @@ console.log(counter());
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
 
-let makeCounter1 = (a) => {
+let makeCounter1 = (a: number) => {
   let count = a;
   return {
     increase: () => ++count,
@@ -98,16 +99,52 @@ console.log(counter1.set());//4
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
+function superSum(num: number) {
+  if (num === 0) return 0;
+  if (num === 1) return (n: number) => n;
+
+  let _arguments: number[] = [];
+
+  function helper(...args: number[]) {
+    _arguments = [..._arguments, ...args];
+    if (_arguments.length >= num) {
+      _arguments.length = num;
+      return _arguments.reduce((acc, number) => acc + number);
+    } else {
+      return helper;
+    }
+  }
+
+  return helper;
+}
+
+//переписать через хвостовую рекурсию
+
 //@ts-ignore
+console.log(superSum());
+/*function curry(func) {
+
+  return function curried(...args) {
+    if (args.length >= func.length) {
+      return func.apply(this, args);
+    } else {
+      return function(...args2) {
+        return curried.apply(this, args.concat(args2));
+      }
+    }
+  };
+
+}*/
 
 
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
+// на замыкания
 
 //Напишите функцию sumTo(n), которая вычисляет сумму чисел 1 + 2 + ... + n.
 
-let sumTo = (n: number) => {
-  return n < 1 ? n : n + sumTo(n - 1);
+let sumTo = (n: number): number => {
+  return n === 1 ? n : n + sumTo(n - 1);
 };
 
 sumTo(3);
@@ -183,9 +220,7 @@ let list = {
 };
 
 /*let printList = (list) => {
-};
 printList(list);*/
-
 
 
 // just a plug

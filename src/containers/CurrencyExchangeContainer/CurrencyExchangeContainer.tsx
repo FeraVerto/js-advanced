@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 import CurrencyExchange from '../../components/CurrencyExchange/CurrencyExchange';
 import { IGlobalState } from '../../redux/state';
 import { CurrencyState } from '../../redux/currencyReducer';
@@ -7,30 +7,15 @@ import { bindActionCreators, compose, Dispatch } from 'redux';
 import {
   ChangeActionAC,
   ChangeCurrencyFieldAC,
-  changeCurrentCurrencyAC,
-  CurrencyReducersTypes,
+  changeCurrentCurrencyAC
 } from '../../redux/actions';
+import { selectAll } from '../../redux/selectors';
 
 
-interface ICurrencyProps extends CurrencyState {
-  ChangeCurrencyFieldAC: Function
-  ChangeActionAC: Function
-  changeCurrentCurrencyAC: Function
-}
+const CurrencyEContainer: React.FunctionComponent = () => {
 
-const CurrencyEContainer: React.FunctionComponent<ICurrencyProps> = ({
-                                                                       currencies,
-                                                                       currentCurrency,
-                                                                       isBuying,
-                                                                       amountOfBYN,
-                                                                       ChangeCurrencyFieldAC,
-                                                                       ChangeActionAC,
-                                                                       changeCurrentCurrencyAC,
-                                                                       amountOfCurrency,/*,
-   setCurrencyAmount,
-   setAction,
-changeCurrency,*/
-                                                                     }) => {
+  let dispatch = useDispatch()
+  let {currencies, currentCurrency, isBuying, amountOfBYN, amountOfCurrency} = useSelector(selectAll)
 
   //Курс валюты, выводится в компонент CurrencyExchange (Валютная биржа)
   let currencyRate: number = 0;
@@ -65,24 +50,15 @@ changeCurrency,*/
       if (trigger === 'byn') {
         if (value === '') {
           //отправляет в диспатч пустые значения
-          //setCurrencyAmount(value, value);
-          ChangeCurrencyFieldAC(value, value);
+          dispatch(ChangeCurrencyFieldAC(value, value));
         } else {
-          //отправляет в диспатч значение введенное в инпут и вычисленное значение
-          //Метод toFixed() форматирует число, используя запись с фиксированной запятой.
-          //JS не умеет округлять!!! Важно при работе с финансами
-          //У унарного + самый низкий приоритет
-          //toFixed возвращает строку, поэтому ставим дополнительный +
-          //setCurrencyAmount(value, (+Number(value).toFixed(2) / currencyRate).toFixed(2));
-          ChangeCurrencyFieldAC(value, (+Number(value).toFixed(2) / currencyRate).toFixed(2));
+          dispatch(ChangeCurrencyFieldAC(value, (+Number(value).toFixed(2) / currencyRate).toFixed(2)));
         }
       } else {
         if (value === '') {
-          //setCurrencyAmount(value, value);
-          ChangeCurrencyFieldAC(value, value);
+          dispatch(ChangeCurrencyFieldAC(value, value));
         } else {
-          //setCurrencyAmount((+Number(value).toFixed(2) * currencyRate).toFixed(2), value);
-          ChangeCurrencyFieldAC((+Number(value).toFixed(2) * currencyRate).toFixed(2), value);
+          dispatch(ChangeCurrencyFieldAC((+Number(value).toFixed(2) * currencyRate).toFixed(2), value));
         }
       }
     }
@@ -90,16 +66,12 @@ changeCurrency,*/
 
   //достает значение из атрибута  data-action и проверяет: если 'buy', то диспатчит true
   const changeAction = (e: React.MouseEvent<HTMLSpanElement>) => {
-    /*e.currentTarget.dataset.action === 'buy' ? setAction(true) : setAction(false);*/
-    e.currentTarget.dataset.action === 'buy' ? ChangeActionAC(true) : ChangeActionAC(false);
+    e.currentTarget.dataset.action === 'buy' ? dispatch(ChangeActionAC(true)) : dispatch(ChangeActionAC(false));
   };
 
   //достает значение из data-currency= "currency" и диспатчит
   const changeCurrentCurrency = (e: React.MouseEvent<HTMLLIElement>) => {
-    /*
-        e.currentTarget.dataset.currency && changeCurrency(e.currentTarget.dataset.currency);
-    */
-    e.currentTarget.dataset.currency && changeCurrentCurrencyAC(e.currentTarget.dataset.currency);
+    e.currentTarget.dataset.currency && dispatch(changeCurrentCurrencyAC(e.currentTarget.dataset.currency));
   };
 
   return (
@@ -119,37 +91,5 @@ changeCurrency,*/
   );
 };
 
-const mapStateToProps = (state: IGlobalState) => {
-  return {
-    currencies: state.currency.currencies,
-    currentCurrency: state.currency.currentCurrency,
-    isBuying: state.currency.isBuying,
-    amountOfBYN: state.currency.amountOfBYN,
-    amountOfCurrency: state.currency.amountOfCurrency,
-  };
-};
-
-/*const mapDispatchToProps = (dispatch: Dispatch<CurrencyReducersTypes>) => {
-  return {
-    setCurrencyAmount(amountOfBYN: string, amountOfCurrency: string) {
-      dispatch(ChangeCurrencyFieldAC(amountOfBYN, amountOfCurrency));
-    },
-    setAction(isBuying: boolean) {
-      dispatch(ChangeActionAC(isBuying));
-    },
-    changeCurrency(currency: string) {
-      dispatch(changeCurrentCurrencyAC(currency));
-    },
-  };
-};*/
-
-
-/*
-export const CurrencyExchangeContainer = compose(connect(mapStateToProps, mapDispatchToProps))(CurrencyEContainer);
-*/
-export const CurrencyExchangeContainer = compose(connect(mapStateToProps, {
-  ChangeCurrencyFieldAC,
-  ChangeActionAC,
-  changeCurrentCurrencyAC,
-}))(CurrencyEContainer);
+export default CurrencyEContainer;
 
