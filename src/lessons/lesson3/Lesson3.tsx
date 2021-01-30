@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import API from './API';
 import './lesson_3';
 import s from './Lesson3.module.css';
+import poster from './../../access/img/nophoto.png';
 
 const Lesson3 = () => {
   const [searchName, setSearchName] = useState('');
@@ -60,7 +61,12 @@ const Lesson3 = () => {
               searchResult.map((item: any, index: number) =>
                 <li className={s.movie_item} key={index}>
                   <div className={s.movie_poster}>
-                    <img src={item.Poster} alt={item.Title} width={250} height={350} />
+                    {item.Poster === "N/A" ?
+                      <img src={poster} alt={item.Title} width={250} height={350} />
+                      : <img src={item.Poster} alt={item.Title} width={250} height={350} />
+
+                    }
+
                   </div>
 
                   <div className={s.movie_info}>

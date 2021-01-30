@@ -6,7 +6,7 @@
 
 .movies_search {
     margin-bottom: 60px;
-
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
 }
@@ -48,21 +48,26 @@ h3 {
 }
 
 h3 p {
-    margin: 0;
+    margin: 0 10px 0 0;
     padding: 0;
 }
 
 .button {
+    margin-left: 10px;
+
     width: 150px;
     height: 50px;
+
     border: none;
     border-radius: 7px;
+
     text-transform: uppercase;
     background-color: #0e723a;
     color: white;
 }
 
 .button:hover {
+    outline: none;
     background: #dedb68;
     color: #030303;
     cursor: pointer;
@@ -70,8 +75,12 @@ h3 p {
 }
 
 .input {
+    padding: 5px 5px 5px 15px;
+
     width: 300px;
-    padding: 5px;
+
+    font-size: 20px;
+
     border: none;
     outline: none;
     border-bottom: 1px solid #0e723a;
