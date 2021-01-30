@@ -1,3 +1,5 @@
+http://FeraVerto.github.io/js-advanced
+
 Информация по каждому занятию находится в папке соответствующего занятия в файле README.md
 по следующему пути: src/lessons 
 
