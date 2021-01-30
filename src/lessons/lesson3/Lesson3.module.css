@@ -6,29 +6,50 @@
 
 .movies_search {
     margin-bottom: 60px;
+
     display: flex;
-    height: 50px;
     align-items: center;
+}
+
+.search_block {
+    margin: 15px;
+
+    display: flex;
+    align-items: flex-end;
+    text-transform: uppercase;
 }
 
 
 .movies_list {
-    margin: 0;
-    margin-left: 80px;
+    margin: 0 0 0 80px;
     padding: 0;
+
     width: 95vw;
+
     display: flex;
     flex-wrap: wrap;
 }
 
 .movie_item {
     margin-right: 65px;
+
     display: flex;
     flex-direction: column;
 }
 
 .movie_info {
     width: 250px;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+h3 p {
+    margin: 0;
+    padding: 0;
 }
 
 .button {
@@ -39,7 +60,6 @@
     text-transform: uppercase;
     background-color: #0e723a;
     color: white;
-
 }
 
 .button:hover {
@@ -47,15 +67,12 @@
     color: #030303;
     cursor: pointer;
     transition: background-color 0.8s cubic-bezier(0.1, 0.8, 0.5, 2), color 0.4s 0.4s linear;
-
 }
 
-
-/*
-.movie_item {
-    margin-right: 70px;
+.input {
+    width: 300px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #0e723a;
 }
-
-.movie_item:last-child {
-    margin-right: 0;
-}*/
