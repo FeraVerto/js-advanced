@@ -71,7 +71,7 @@ h3 p {
 
 .movie_title {
     flex-grow: 1;
-    color: red;
+    color: #0e723a;
     font-weight: bold;
     text-wrap: normal;
 }
