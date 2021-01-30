@@ -61,18 +61,16 @@ const Lesson3 = () => {
               searchResult.map((item: any, index: number) =>
                 <li className={s.movie_item} key={index}>
                   <div className={s.movie_poster}>
-                    {item.Poster === "N/A" ?
-                      <img src={poster} alt={item.Title} width={250} height={350} />
+                    {item.Poster === 'N/A'
+                      ? <img src={poster} alt={item.Title} width={250} height={350} />
                       : <img src={item.Poster} alt={item.Title} width={250} height={350} />
-
                     }
-
                   </div>
 
                   <div className={s.movie_info}>
-                    <p>{item.Title}</p>
-                    <p>{item.Type}</p>
-                    <p>{item.Year}</p>
+                    <p className={s.movie_title}>{item.Title}</p>
+                    <p className={s.movie_type}>{item.Type}</p>
+                    <p className={s.movie_year}>{item.Year}</p>
                   </div>
                 </li>)
             }

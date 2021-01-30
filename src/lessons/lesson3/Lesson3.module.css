@@ -1,3 +1,7 @@
+.a {
+    background-color: black;
+}
+
 .movies {
     display: flex;
     flex-direction: column;
@@ -32,13 +36,10 @@
 
 .movie_item {
     margin-right: 65px;
+    margin-bottom: 45px;
 
     display: flex;
     flex-direction: column;
-}
-
-.movie_info {
-    width: 250px;
 }
 
 h3 {
@@ -51,6 +52,34 @@ h3 p {
     margin: 0 10px 0 0;
     padding: 0;
 }
+
+.movie_poster:hover {
+    opacity: 0.5
+}
+
+.movie_info {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 250px;
+}
+
+.movie_type, .movie_year {
+    margin: 0;
+    padding: 0;
+}
+
+.movie_title {
+    flex-grow: 1;
+    color: red;
+    font-weight: bold;
+    text-wrap: normal;
+}
+
+.movie_type {
+    margin-right: 15px;
+}
+
 
 .button {
     margin-left: 10px;
@@ -84,4 +113,7 @@ h3 p {
     border: none;
     outline: none;
     border-bottom: 1px solid #0e723a;
+
+    background-color: black;
+    color: white;
 }
