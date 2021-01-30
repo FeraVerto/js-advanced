@@ -1,0 +1,61 @@
+.movies {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movies_search {
+    margin-bottom: 60px;
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+
+
+.movies_list {
+    margin: 0;
+    margin-left: 80px;
+    padding: 0;
+    width: 95vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie_item {
+    margin-right: 65px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie_info {
+    width: 250px;
+}
+
+.button {
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 7px;
+    text-transform: uppercase;
+    background-color: #0e723a;
+    color: white;
+
+}
+
+.button:hover {
+    background: #dedb68;
+    color: #030303;
+    cursor: pointer;
+    transition: background-color 0.8s cubic-bezier(0.1, 0.8, 0.5, 2), color 0.4s 0.4s linear;
+
+}
+
+
+/*
+.movie_item {
+    margin-right: 70px;
+}
+
+.movie_item:last-child {
+    margin-right: 0;
+}*/
